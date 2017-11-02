@@ -1,0 +1,18 @@
+g() { if [[ $# > 0 ]]; then git "$@"; else git status; fi; }
+
+alias gt="git status"
+alias gl="git log"
+alias gst="git stash"
+alias gsl="git stash list"
+
+gss() { if [[ $# = 1 ]]; then git stash save "$1"; else echo "Stash name required."; fi; }
+gsa() { git stash apply stash@{$1}; }
+gsd() { git stash drop stash@{$1}; }
+
+if [ -r /usr/share/bash-completion/completions/git ]
+then
+    source /usr/share/bash-completion/completions/git
+    __git_complete g __git_main
+    __git_complete gl _git_log
+    __git_complete gst _git_stash
+fi
