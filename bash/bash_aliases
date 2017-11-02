@@ -1,0 +1,13 @@
+
+alias ls='ls -al --color=auto'
+alias l='ls -l'
+alias ll='ls -l'
+alias la="ls -laF"
+alias lh='ls -lh'
+
+alias grep='grep --color=auto'
+alias c='grep -rnI '
+
+cm () {
+    grep -rnI $@ --color=always | less -R
+}

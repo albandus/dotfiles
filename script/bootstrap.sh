@@ -20,6 +20,10 @@ success () {
   printf "\r\033[2K[\033[00;32mOK  \033[0m] $1\n"
 }
 
+warn () {
+  printf "\r[\033[0;33mWARN\033[0m] $1\n"
+}
+
 link_file () {
   local src=$1 dst=$2
 
@@ -107,6 +111,31 @@ install_dotfiles () {
   done
 }
 
+setup_bashrc () {
+    # Build target file as tmp
+    tmpFile=$(mktemp $DOTFILES_ROOT/bash/bashrc.XXX)
+    chmod 664 $tmpFile
+    sed -e "s@BOOTSTRAP_DOTFILES_ROOT@$DOTFILES_ROOT@g" bash/bashrc.symlink.template > $tmpFile
+
+    if [ ! -f bash/bashrc.symlink ]
+    then
+        mv $tmpFile bash/bashrc.symlink
+        success "setup bashrc.symlink"
+        return
+    fi
+
+    # If target file exists, checks diff to show status
+    diffStatus=$(diff -q bash/bashrc.symlink $tmpFile > /dev/null; echo $?)
+    rm -f $tmpFile
+    if [ $diffStatus -eq 0 ]
+    then
+        info "bash/bashrc.symlink already OK"
+    else
+        warn "bash/bashrc.symlink already exists but built from template differ, skipped"
+    fi
+}
+
+setup_bashrc
 install_dotfiles
 success 'All installed!'
 

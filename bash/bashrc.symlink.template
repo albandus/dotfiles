@@ -1,0 +1,6 @@
+
+# export line built by bootstrap script
+export DOTFILES_ROOT="BOOTSTRAP_DOTFILES_ROOT"
+
+source ${DOTFILES_ROOT}/bash/bash_histcontrol
+source ${DOTFILES_ROOT}/bash/bash_aliases

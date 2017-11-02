@@ -1,5 +1,3 @@
-# If not running interactively, don't do anything
-[ -z "$PS1" ] && return
 
 HISTCONTROL=ignoreboth
 HISTSIZE=10000
@@ -12,4 +10,3 @@ shopt -s histappend
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-export EDITOR=vim
