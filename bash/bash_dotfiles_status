@@ -1,5 +1,5 @@
-hasDiff=$(git --git-dir $DOTFILES_ROOT/.git diff-index --quiet HEAD --; echo $?)
-if [ $hasDiff -eq 1 ]
+hasDiff=$(git -C $DOTFILES_ROOT status --porcelain | wc -l)
+if [ $hasDiff ]
 then
     echo "Dotfiles repository has uncommitted changes"
 fi
