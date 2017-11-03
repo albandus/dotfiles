@@ -8,20 +8,29 @@ DOTFILES_ROOT=$(pwd -P)
 # Auto-exit on errors
 set -e
 
-info () {
-  printf "\r[\033[00;34mINFO\033[0m] $1\n"
+infoMsg () {
+    printf "\r[\033[00;34mINFO\033[0m] $1\n"
 }
 
-user () {
-  printf "\r[\033[0;33m??  \033[0m] $1\n"
+askMsg () {
+    printf "\r[\033[0;33m????\033[0m] $1\n"
 }
 
-success () {
-  printf "\r\033[2K[\033[00;32mOK  \033[0m] $1\n"
+successMsg () {
+    printf "\r\033[2K[\033[00;32mOK  \033[0m] $1\n"
 }
 
-warn () {
-  printf "\r[\033[0;33mWARN\033[0m] $1\n"
+warnMsg () {
+    printf "\r[\033[0;33mWARN\033[0m] $1\n"
+}
+
+errMsg () {
+    printf "\r[\033[0;31mERR \033[0m] $1\n"
+}
+
+fatalMsg () {
+    errMsg "$1"
+    exit 1
 }
 
 link_file () {
@@ -45,7 +54,7 @@ link_file () {
 
       else
 
-        user "File already exists: $dst ($(basename "$src")), what do you want to do?\n\
+        askMsg "File already exists: $dst ($(basename "$src")), what do you want to do?\n\
         [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
         read -n 1 action
 
@@ -77,30 +86,32 @@ link_file () {
     if [ "$overwrite" == "true" ]
     then
       rm -rf "$dst"
-      success "removed $dst"
+      successMsg "removed $dst"
     fi
 
     if [ "$backup" == "true" ]
     then
-      mv --backup=numbered "$dst" "${dst}.backup"
-      success "moved $dst to ${dst}.backup"
+      backup=$(date "+%Y-%m-%d")
+      backup=$(mktemp "$dst.backup.$backup.XXX")
+      mv "$dst" "$backup"
+      successMsg "moved $dst to ${dst}.backup"
     fi
 
     if [ "$skip" == "true" ]
     then
-      success "skipped $src"
+      successMsg "skipped $src"
     fi
   fi
 
   if [ "$skip" != "true" ]  # "false" or empty
   then
     ln -s "$1" "$2"
-    success "linked $1 to $2"
+    successMsg "linked $1 to $2"
   fi
 }
 
 install_dotfiles () {
-  info 'installing dotfiles'
+  infoMsg 'installing dotfiles'
 
   local overwrite_all=false backup_all=false skip_all=false
 
@@ -120,22 +131,42 @@ setup_bashrc () {
     if [ ! -f bash/bashrc.symlink ]
     then
         mv $tmpFile bash/bashrc.symlink
-        success "setup bashrc.symlink"
+        successMsg "setup bashrc.symlink"
         return
     fi
 
     # If target file exists, checks diff to show status
     diffStatus=$(diff -q bash/bashrc.symlink $tmpFile > /dev/null; echo $?)
-    rm -f $tmpFile
     if [ $diffStatus -eq 0 ]
     then
-        info "bash/bashrc.symlink already OK"
-    else
-        warn "bash/bashrc.symlink already exists but built from template differ, skipped"
+        rm -f $tmpFile
+        infoMsg "bash/bashrc.symlink already OK"
+        return
     fi
+
+    local action=
+    askMsg "File already exists: $DOTFILES_ROOT/bash/bashrc.symlink, what do you want to do?\n\
+    [s]kip,  [o]verwrite, [b]ackup?"
+    read -n 1 action
+
+    case "$action" in
+      b )
+        backup=$(date "+%Y-%m-%d")
+        backup=$(mktemp "bashrc.symlink.backup.$backup.XXX")
+        mv "bash/bashrc.symlink" "bash/$backup"
+        ;;
+      o )
+        ;;
+      s )
+        return;;
+      * )
+        return;;
+    esac
+    mv $tmpFile bash/bashrc.symlink
+    successMsg 'bash/bashrc.symlink built'
 }
 
 setup_bashrc
 install_dotfiles
-success 'All installed!'
+successMsg 'All installed!'
 
