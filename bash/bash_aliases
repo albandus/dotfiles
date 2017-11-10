@@ -1,7 +1,19 @@
-alias ls='ls -al --color=auto'
+# enable color in terminal (mac os)
+if [ "$(uname -s)" == "Darwin" ]
+then
+    export CLICOLOR="xterm"
+fi
+
+# enable color in terminal (linux)
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias grep='grep --color=auto'
+fi
+
 alias l='ls -l'
 alias ll='ls -l'
-alias la="ls -laF"
+alias la="ls -la"
 alias lh='ls -lh'
 
 alias grep='grep --color=auto'

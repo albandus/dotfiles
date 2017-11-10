@@ -1,0 +1,118 @@
+set nocompatible                    " required for Vundle
+filetype off                        " required for Vundle
+set rtp+=~/.vim/bundle/Vundle.vim   " Vundle
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdcommenter'
+" Plugin 'tpope/vim-commentary'
+Plugin 'ctrlp.vim'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'kylef/apiblueprint.vim'
+Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'fatih/vim-go'
+Plugin 'joonty/vdebug'
+Plugin 'aquach/vim-http-client'
+call vundle#end()
+filetype plugin indent on           " restore (disabled for Vundle)
+
+
+"vdebug
+let g:vdebug_options = {'path_maps' : {"/data": "/home/alban/work"}}
+
+" ctrlp config
+set wildignore+=*/tmp/*,*.zip,*/build/*,*/.hg/*,*/.git/*
+set wildignore+=*.jpg,*.jpeg,*.gif,*.png,*.gif,*.psd,*.o,*.obj,*.min.js
+set wildignore+=*/node_modules/*
+let g:ctrlp_max_files=60000 " Max files ctrlp should index before stopping
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+    \ 'file': '\v\.(exe|so|dll)$'
+    \ }
+let g:ctrlp_working_path_mode = 0
+
+" Syntax file associations
+au BufRead,BufNewFile *.avsc set filetype=javascript
+
+let mapleader = ","
+nmap <leader>ne :NERDTreeToggle<cr>
+map <silent> <C-n> :NERDTreeFocus<cr>
+
+" quick access to global buffer
+noremap <leader>y "+y
+noremap <leader>p "+p
+
+" delete line to blackhole register
+nnoremap <leader>d "_d
+
+nnoremap <F12> :buffers<CR>:buffer<Space>
+
+" Unmap c (not using it and can delete lines when using nerdcommenter)
+map c <Nop>
+
+"command! CtrlPFiletype call ctrlp#init(ctrlp#filetype#id())
+"let g:ctrlp_extensions = ['filetype']
+"silent! nnoremap <unique> <silent> <Leader>f :CtrlPFiletype<CR>
+"set encoding=utf-8
+
+nnoremap <bs> X
+"set backspace=indent,eol,start
+
+" searches to middle of the screen
+nnoremap n nzz
+nnoremap N Nzz
+
+" textwidth & reformat
+nnoremap <leader>w :set tw=80<CR>gqip:set tw=0<CR>
+vnoremap <leader>w :<backspace><backspace><backspace><backspace><backspace>set tw=80<CR>gvgq:set tw=0<CR>
+
+
+" markdown
+let g:vim_markdown_folding_disabled = 1
+
+syn on
+set nowrap
+set backspace=indent,eol,start
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set ul=500
+set expandtab
+"set ai!
+set nu
+set background=dark
+
+" Whitespace
+set listchars=tab:▸\ ,trail:⏠,eol:◦,nbsp:⎵
+" color ctermcfg: http://vim.wikia.com/wiki/Xterm256_color_names_for_console_Vim
+highlight SpecialKey ctermfg=232 guifg=#080808
+set list
+
+"" Searching
+set hlsearch                    " highlight matches
+set incsearch                   " incremental searching
+set ignorecase                  " searches are case insensitive...
+set smartcase                   " ... unless they contain at least one capital letter
+
+"" Solarized
+"set background=dark
+"colorscheme solarized
+
+autocmd BufRead,BufNewFile *.coffee,*.js,*.json setl ts=2 sw=2 sts=2
+
+" window title for tmux.
+"autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window '" . expand("%:t") . "'")
+"autocmd VimLeave * call system("tmux set-window-option automatic-rename on")
+
+
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:go_fmt_command = "goimports"
+
+set mouse=a
+set ttymouse=xterm2

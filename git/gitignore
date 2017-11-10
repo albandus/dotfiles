@@ -1,0 +1,11 @@
+**/.*swp
+.bash_history
+.bashrc
+.buildpath
+.glide/
+.project
+.settings/
+.ssh/
+alocal/
+anotes.md
+docker-compose.override.yml
