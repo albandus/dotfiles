@@ -72,7 +72,6 @@ nnoremap N Nzz
 nnoremap <leader>w :set tw=80<CR>gqip:set tw=0<CR>
 vnoremap <leader>w :<backspace><backspace><backspace><backspace><backspace>set tw=80<CR>gvgq:set tw=0<CR>
 
-
 " markdown
 let g:vim_markdown_folding_disabled = 1
 
