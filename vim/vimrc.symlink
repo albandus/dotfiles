@@ -38,7 +38,7 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_working_path_mode = 0
 
 " Syntax file associations
-au BufRead,BufNewFile *.avsc set filetype=javascript
+au BufNewFile,BufRead .bashrc*,bashrc,bash_*,.bash_*, call SetFileTypeSH("bash")
 
 let mapleader = ","
 nmap <leader>ne :NERDTreeToggle<cr>
