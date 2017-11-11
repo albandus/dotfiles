@@ -13,6 +13,6 @@ source ${DOTFILES_ROOT}/script/includes/link_file.sh
 source ${DOTFILES_ROOT}/script/includes/install_dotfiles.sh
 source ${DOTFILES_ROOT}/script/includes/setup_bashrc.sh
 
-setup_bashrc
-install_dotfiles
+setup_bashrc "${DOTFILES_ROOT}" "${DOTFILES_ROOT}/bash/bashrc.symlink"
+install_dotfiles "${DOTFILES_ROOT}"
 successMsg 'All installed!'

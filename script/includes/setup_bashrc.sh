@@ -1,37 +1,40 @@
 #!/usr/bin/env bash
 
 setup_bashrc () {
-    # Build target file as tmp
-    tmpFile=$(mktemp $DOTFILES_ROOT/bash/bashrc.symlink.XXX)
-    chmod 664 $tmpFile
-    sed -e "s@BOOTSTRAP_DOTFILES_ROOT@$DOTFILES_ROOT@g" $DOTFILES_ROOT/bash/bashrc.symlink.template > $tmpFile
+    local WORKING_DIR="$1" dst="$2"
 
-    if [ ! -f $DOTFILES_ROOT/bash/bashrc.symlink ]
+    # Build target file as tmp
+    tmpFile=$(mktemp $TMPDIR/bashrc.symlink.XXXXX)
+    chmod 664 $tmpFile
+    sed -e "s@BOOTSTRAP_DOTFILES_ROOT@$WORKING_DIR@g" $WORKING_DIR/bash/bashrc.symlink.template > $tmpFile
+
+    if [ ! -f $dst ]
     then
-        mv $tmpFile $DOTFILES_ROOT/bash/bashrc.symlink
+        mv $tmpFile $dst
         successMsg "setup bashrc.symlink"
         return
     fi
 
     # If target file exists, checks diff to show status
-    diffStatus=$(diff -q $DOTFILES_ROOT/bash/bashrc.symlink $tmpFile > /dev/null; echo $?)
+    diffStatus=$(diff -q $dst $tmpFile > /dev/null; echo $?)
     if [ $diffStatus -eq 0 ]
     then
         rm -f $tmpFile
-        infoMsg "bash/bashrc.symlink already OK"
+        infoMsg "$dst already OK"
         return
     fi
 
     local action=
-    askMsg "File already exists: $DOTFILES_ROOT/bash/bashrc.symlink, what do you want to do?\n\
+    askMsg "File already exists: $dst\n\
+    and is different from generated one $tmpFile, what do you want to do?\n\
     [s]kip,  [o]verwrite, [b]ackup?"
     read -n 1 action
 
     case "$action" in
       b )
         backup=$(date "+%Y-%m-%d")
-        backup=$(mktemp "$DOTFILES_ROOT/bashrc.symlink.backup.$backup.XXX")
-        mv "$DOTFILES_ROOT/bash/bashrc.symlink" "$backup"
+        backup=$(mktemp "$dst.backup.$backup.XXX")
+        mv $dst "$backup"
         ;;
       o )
         ;;
@@ -40,6 +43,6 @@ setup_bashrc () {
       * )
         return;;
     esac
-    mv $tmpFile $DOTFILES_ROOT/bash/bashrc.symlink
-    successMsg 'bash/bashrc.symlink built'
+    mv $tmpFile $dst
+    successMsg "$dst built"
 }
