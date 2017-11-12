@@ -2,7 +2,7 @@
 
 check_requirements () {
     local error=0
-    if [[ $(type git > /dev/null 2>&1; echo $?) == 1 ]]
+    if [[ $(type git &> /dev/null; echo $?) == 1 ]]
     then
         error=1
         errMsg "git not installed"
@@ -10,7 +10,7 @@ check_requirements () {
 
     if [ "$(uname -s)" == "Darwin" ]
     then
-        if [[ $(type brew > /dev/null 2>&1; echo $?) == 1 ]]
+        if [[ $(type brew &> /dev/null; echo $?) == 1 ]]
         then
             error=1
             errMsg "brew not installed"
