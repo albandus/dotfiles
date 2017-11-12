@@ -1,12 +1,20 @@
 #!/usr/bin/env bash
 
 check_requirements () {
-    error=0
-    git=$(type git > /dev/null; echo $?)
-    if [[ $git == 1 ]]
+    local error=0
+    if [[ $(type git > /dev/null 2>&1; echo $?) == 1 ]]
     then
         error=1
-        errorMsg "git not installed"
+        errMsg "git not installed"
+    fi
+
+    if [ "$(uname -s)" == "Darwin" ]
+    then
+        if [[ $(type brew > /dev/null 2>&1; echo $?) == 1 ]]
+        then
+            error=1
+            errMsg "brew not installed"
+        fi
     fi
 
     if [[ $error == 1 ]]
