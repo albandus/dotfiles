@@ -1,6 +1,6 @@
-HISTCONTROL=ignoreboth
-HISTSIZE=10000
-HISTFILESIZE=10000
+export HISTCONTROL=ignoreboth
+export HISTSIZE='32768';
+export HISTFILESIZE="${HISTSIZE}";
 
 # append to the history file, don't overwrite it
 shopt -s histappend
