@@ -21,4 +21,9 @@ check_requirements () {
     then
         exit 1
     fi
+
+    if [[ "$TMPDIR" == "" ]]
+    then
+        TMPDIR="/tmp"
+    fi
 }
