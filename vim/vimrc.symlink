@@ -87,6 +87,9 @@ set expandtab
 set nu
 set background=dark
 
+" Custom rules depending on filetype, see http://vim.wikia.com/wiki/Indenting_source_code
+"au FileType java setlocal sw=2 sts2
+
 " Whitespace
 set listchars=tab:▸\ ,trail:⏠,eol:◦,nbsp:⎵
 " color ctermcfg: http://vim.wikia.com/wiki/Xterm256_color_names_for_console_Vim
@@ -112,6 +115,8 @@ autocmd BufRead,BufNewFile *.coffee,*.js,*.json setl ts=2 sw=2 sts=2
 
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:go_fmt_command = "goimports"
+" disable syntastic for java files
+let g:syntastic_mode_map = { 'passive_filetypes': ['java'] }
 
 set mouse=a
 set ttymouse=xterm2
