@@ -21,8 +21,9 @@ link_file () {
 
       else
 
-        askMsg "File already exists: $dst ($(basename "$src")), what do you want to do?\n\
-        [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
+        askMsg "Create link from $src to $dst. Destination already exists, points to: $(readlink "$dst")\n\
+        What do you want to do?\n\
+        [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all? (default: skip)"
         read -n 1 action
 
         case "$action" in
@@ -39,7 +40,7 @@ link_file () {
           S )
             skip_all=true;;
           * )
-            ;;
+            skip=true;;
         esac
 
       fi
