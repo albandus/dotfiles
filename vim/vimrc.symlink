@@ -119,4 +119,11 @@ let g:go_fmt_command = "goimports"
 let g:syntastic_mode_map = { 'passive_filetypes': ['java'] }
 
 set mouse=a
-set ttymouse=xterm2
+" ensure mouse works on right part of large screens
+if has("mouse_sgr")
+    set ttymouse=sgr
+else
+    set ttymouse=xterm2
+end
+
+set ruler
