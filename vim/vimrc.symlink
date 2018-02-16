@@ -90,12 +90,6 @@ set background=dark
 " Custom rules depending on filetype, see http://vim.wikia.com/wiki/Indenting_source_code
 "au FileType java setlocal sw=2 sts2
 
-" Whitespace
-set listchars=tab:▸\ ,trail:⏠,eol:◦,nbsp:⎵
-" color ctermcfg: http://vim.wikia.com/wiki/Xterm256_color_names_for_console_Vim
-highlight SpecialKey ctermfg=232 guifg=#080808
-set list
-
 "" Searching
 set hlsearch                    " highlight matches
 set incsearch                   " incremental searching
