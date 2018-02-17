@@ -10,6 +10,7 @@ PATH="$PATH:$DOTFILES_ROOT/bin"
 
 source ${DOTFILES_ROOT}/bash/bash_histcontrol
 source ${DOTFILES_ROOT}/bash/bash_aliases
+source ${DOTFILES_ROOT}/bash/bash_completion
 source ${DOTFILES_ROOT}/bash/bash_git_shortcuts
 source ${DOTFILES_ROOT}/bash/bash_golang
 source ${DOTFILES_ROOT}/bash/bash_prompt
