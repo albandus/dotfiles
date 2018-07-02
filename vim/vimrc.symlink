@@ -112,12 +112,12 @@ let g:go_fmt_command = "goimports"
 " disable syntastic for java files
 let g:syntastic_mode_map = { 'passive_filetypes': ['java'] }
 
-set mouse=a
-" ensure mouse works on right part of large screens
-if has("mouse_sgr")
-    set ttymouse=sgr
-else
-    set ttymouse=xterm2
-end
+"set mouse=a
+"" ensure mouse works on right part of large screens
+"if has("mouse_sgr")
+    "set ttymouse=sgr
+"else
+    "set ttymouse=xterm2
+"end
 
 set ruler
