@@ -1,0 +1,30 @@
+[user]
+	email = BOOTSTRAP_GIT_EMAIL
+	name = BOOTSTRAP_GIT_USERNAME
+
+[push]
+	default = simple
+
+[alias]
+    sl = stash list
+    co = checkout
+    br = branch
+    bra = branch -avv
+    fa = fetch --all --prune
+    tagcommit = rev-list -n 1
+
+    # Diff on given number of latest commits
+    dif = "!r() { git diff HEAD~$1 HEAD; }; r"
+
+    # Interactive rebase with the given number of latest commits
+    reb = "!r() { git rebase -i HEAD~$1; }; r"
+
+    # List commits, short form with log messages, one liner.
+    ls = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+
+    # List commits, showing changed files
+    ll = "log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat"
+
+[core]
+	excludesfile = BOOTSTRAP_DOTFILES_ROOT/git/gitignore
+

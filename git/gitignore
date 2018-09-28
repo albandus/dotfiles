@@ -9,3 +9,4 @@
 alocal/
 anotes.md
 docker-compose.override.yml
+.DS_Store
