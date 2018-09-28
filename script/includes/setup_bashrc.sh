@@ -24,6 +24,8 @@ setup_bashrc () {
         return
     fi
 
+    # || true, avoid script ending with diff exit code
+    diff $tmpFile $dst || true
     local action=
     askMsg "File already exists: $dst\n\
     and is different from generated one $tmpFile, what do you want to do?\n\
