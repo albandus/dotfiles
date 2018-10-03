@@ -13,8 +13,8 @@ setup_gitconfig () {
     read gitUsername
     askMsg "Git email? "
     read gitEmail
-    sed -e "s@BOOTSTRAP_GIT_USERNAME@$gitUsername@g" -i"" $tmpFile
-    sed -e "s/BOOTSTRAP_GIT_EMAIL/$gitEmail/g" -i"" $tmpFile
+    sed -e "s@BOOTSTRAP_GIT_USERNAME@$gitUsername@g" -i="" $tmpFile
+    sed -e "s/BOOTSTRAP_GIT_EMAIL/$gitEmail/g" -i="" $tmpFile
 
     if [ ! -f $dst ]
     then
