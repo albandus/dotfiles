@@ -37,8 +37,10 @@ let g:ctrlp_custom_ignore = {
     \ }
 let g:ctrlp_working_path_mode = 0
 
-" Syntax file associations
-au BufNewFile,BufRead .bashrc*,bashrc,bash_*,.bash_*, call SetFileTypeSH("bash")
+if exists("*SetFileTypeSH")
+  " Custom syntax file associations
+  au BufNewFile,BufRead .bashrc*,bashrc,bash_*,.bash_*, call SetFileTypeSH("bash")
+endif
 
 let mapleader = ","
 nmap <leader>ne :NERDTreeToggle<cr>
