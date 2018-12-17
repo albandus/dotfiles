@@ -17,11 +17,13 @@ Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'fatih/vim-go'
-Plugin 'joonty/vdebug'
+"Plugin 'joonty/vdebug'
 Plugin 'aquach/vim-http-client'
 call vundle#end()
 filetype plugin indent on           " restore (disabled for Vundle)
 
+" Fix for nerdtree plugin arrows
+set encoding=utf-8
 
 "vdebug
 let g:vdebug_options = {'path_maps' : {"/data": "/home/alban/work"}}
