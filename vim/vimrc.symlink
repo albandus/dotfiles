@@ -3,22 +3,23 @@ filetype off                        " required for Vundle
 set rtp+=~/.vim/bundle/Vundle.vim   " Vundle
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
+" https://github.com/scrooloose/nerdtree
 Plugin 'scrooloose/nerdtree'
+" https://github.com/Xuyuanp/nerdtree-git-plugin
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdcommenter'
-" Plugin 'tpope/vim-commentary'
 Plugin 'ctrlp.vim'
+" https://github.com/godlygeek/tabular
+" Align things, never used?
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'kylef/apiblueprint.vim'
+" https://github.com/ntpeters/vim-better-whitespace
+" Highlight whitespace chars. Provide function :StripWhitespace
 Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'derekwyatt/vim-scala'
-Plugin 'kchmck/vim-coffee-script'
+" https://github.com/fatih/vim-go
 Plugin 'fatih/vim-go'
-"Plugin 'joonty/vdebug'
-Plugin 'aquach/vim-http-client'
+" https://github.com/dhruvasagar/vim-table-mode
 Plugin 'dhruvasagar/vim-table-mode'
 call vundle#end()
 filetype plugin indent on           " restore (disabled for Vundle)
@@ -61,11 +62,6 @@ nnoremap <F12> :buffers<CR>:buffer<Space>
 " Unmap c (not using it and can delete lines when using nerdcommenter)
 map c <Nop>
 
-"command! CtrlPFiletype call ctrlp#init(ctrlp#filetype#id())
-"let g:ctrlp_extensions = ['filetype']
-"silent! nnoremap <unique> <silent> <Leader>f :CtrlPFiletype<CR>
-"set encoding=utf-8
-
 " Avoid folding by default
 set foldlevelstart=99
 
@@ -91,12 +87,8 @@ set shiftwidth=4
 set softtabstop=4
 set ul=500
 set expandtab
-"set ai!
 set nu
 set background=dark
-
-" Custom rules depending on filetype, see http://vim.wikia.com/wiki/Indenting_source_code
-"au FileType java setlocal sw=2 sts2
 
 "" Searching
 set hlsearch                    " highlight matches
@@ -104,29 +96,19 @@ set incsearch                   " incremental searching
 set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless they contain at least one capital letter
 
-"" Solarized
-"set background=dark
-"colorscheme solarized
-
 autocmd BufRead,BufNewFile *.coffee,*.js,*.json setl ts=2 sw=2 sts=2
-
-" window title for tmux.
-"autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window '" . expand("%:t") . "'")
-"autocmd VimLeave * call system("tmux set-window-option automatic-rename on")
-
 
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:go_fmt_command = "goimports"
 " disable syntastic for java files
 let g:syntastic_mode_map = { 'passive_filetypes': ['java'] }
 
-"set mouse=a
-"" ensure mouse works on right part of large screens
-"if has("mouse_sgr")
-    "set ttymouse=sgr
-"else
-    "set ttymouse=xterm2
-"end
+" Go Highlighting
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_variable_declarations = 1
+let g:go_highlight_variable_assignments = 1
+let g:go_highlight_types = 1
 
 set ruler
 
