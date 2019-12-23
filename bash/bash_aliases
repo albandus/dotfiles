@@ -17,7 +17,7 @@ alias la="ls -la"
 alias lh='ls -lh'
 
 alias grep='grep --color=auto'
-alias c='grep -rnI '
+alias c='grep -rnI --color=always'
 
 cm () {
     echo "grep -rnI $@ --color=always | less -R"
