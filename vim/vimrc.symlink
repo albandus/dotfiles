@@ -19,6 +19,10 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " https://github.com/fatih/vim-go
 Plug 'fatih/vim-go', { 'tag': '*' }
 
+" Split & join (gs / gJ to split structs)
+" https://github.com/AndrewRadev/splitjoin.vim
+Plug 'AndrewRadev/splitjoin.vim'
+
 " https://github.com/ntpeters/vim-better-whitespace
 " Highlight whitespace chars. Provide function :StripWhitespace
 Plug 'ntpeters/vim-better-whitespace'
@@ -38,6 +42,9 @@ Plug 'dhruvasagar/vim-table-mode'
 " https://github.com/junegunn/fzf.vim
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+
+" Color themes
+Plug 'fatih/molokai'
 
 call plug#end()
 
@@ -101,4 +108,18 @@ set expandtab
 set nu
 " backspace in cmd mod
 nnoremap <bs> X
+
+" Syntastic go
+let g:syntastic_go_checkers = ['golint', 'errcheck']
+let g:go_fmt_command = "goimports"
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_interfaces = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
+" Theme
+colorscheme molokai
 
