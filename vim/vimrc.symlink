@@ -17,7 +17,7 @@ Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " https://github.com/fatih/vim-go
-Plug 'fatih/vim-go', { 'tag': '*' }
+Plug 'fatih/vim-go', { 'tag': '*', 'do': ':GoInstallBinaries' }
 
 " Split & join (gs / gJ to split structs)
 " https://github.com/AndrewRadev/splitjoin.vim
@@ -45,6 +45,22 @@ Plug 'junegunn/fzf.vim'
 
 " Color themes
 Plug 'fatih/molokai'
+
+" Deoplete Completion
+" https://github.com/Shougo/deoplete.nvim
+" Require on system: pip3 install pynvim
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+let g:deoplete#enable_at_startup = 1
+
+" Golang-related deoplete features.
+Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
+let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+let g:deoplete#sources#go#builtin_objects = 1
+let g:deoplete#sources#go#unimported_packages = 1
+let g:deoplete#sources#go#pointer = 1
 
 call plug#end()
 
@@ -98,6 +114,11 @@ if exists("*SetFileTypeSH")
   au BufNewFile,BufRead .bashrc*,bashrc,bash_*,.bash_*, call SetFileTypeSH("bash")
 endif
 
+" Make the post-search window usable again!
+nnoremap <C-l> :nohlsearch<CR>
+" Go fuck yourself Ex mode.
+map Q <Nop>
+
 set nowrap
 set backspace=indent,eol,start
 set tabstop=4
@@ -105,21 +126,31 @@ set shiftwidth=4
 set softtabstop=4
 set ul=500
 set expandtab
-set nu
+set number
 " backspace in cmd mod
 nnoremap <bs> X
 
 " Syntastic go
-let g:syntastic_go_checkers = ['golint', 'errcheck']
 let g:go_fmt_command = "goimports"
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
+let g:go_list_type = "quickfix"
+let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_interfaces = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+let g:go_highlight_variable_declarations = 1
+let g:go_highlight_variable_assignments = 1
+let g:syntastic_go_checkers = ['vet', 'golint', 'errcheck']
+let g:go_auto_type_info = 0
 
 " Theme
 colorscheme molokai
+
+" Prevent any unwanted initiative...
+set background=dark
+
+" Improve rendering and copy paste?
+set lazyredraw
+set ttyfast
 
