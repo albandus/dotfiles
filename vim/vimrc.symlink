@@ -1,72 +1,65 @@
-set nocompatible                    " required for Vundle
-filetype off                        " required for Vundle
-set rtp+=~/.vim/bundle/Vundle.vim   " Vundle
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
-" https://github.com/scrooloose/nerdtree
-Plugin 'scrooloose/nerdtree'
-" https://github.com/Xuyuanp/nerdtree-git-plugin
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'scrooloose/syntastic'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'ctrlp.vim'
-" https://github.com/godlygeek/tabular
-" Align things, never used?
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-" https://github.com/ntpeters/vim-better-whitespace
-" Highlight whitespace chars. Provide function :StripWhitespace
-Plugin 'ntpeters/vim-better-whitespace'
-" https://github.com/fatih/vim-go
-Plugin 'fatih/vim-go'
-" https://github.com/dhruvasagar/vim-table-mode
-Plugin 'dhruvasagar/vim-table-mode'
-call vundle#end()
-filetype plugin indent on           " restore (disabled for Vundle)
+" vim config file , built on 2020-01-17
 
-" Fix for nerdtree plugin arrows
-set encoding=utf-8
-
-"vdebug
-let g:vdebug_options = {'path_maps' : {"/data": "/home/alban/work"}}
-
-" ctrlp config
-set wildignore+=*/tmp/*,*.zip,*/build/*,*/.hg/*,*/.git/*
-set wildignore+=*.jpg,*.jpeg,*.gif,*.png,*.gif,*.psd,*.o,*.obj,*.min.js
-set wildignore+=*/node_modules/*
-let g:ctrlp_max_files=60000 " Max files ctrlp should index before stopping
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-    \ 'file': '\v\.(exe|so|dll)$'
-    \ }
-let g:ctrlp_working_path_mode = 0
-
-if exists("*SetFileTypeSH")
-  " Custom syntax file associations
-  au BufNewFile,BufRead .bashrc*,bashrc,bash_*,.bash_*, call SetFileTypeSH("bash")
+" auto install vim-plug
+" source: https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-let mapleader = ","
-nmap <leader>ne :NERDTreeToggle<cr>
-map <silent> <C-n> :NERDTreeFocus<cr>
+call plug#begin('~/.vim/plugged')
 
+" NERDTree =========================================================
+" https://github.com/preservim/nerdtree
+Plug 'preservim/nerdtree'
+" https://github.com/Xuyuanp/nerdtree-git-plugin
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" https://github.com/fatih/vim-go
+Plug 'fatih/vim-go', { 'tag': '*' }
+
+" https://github.com/ntpeters/vim-better-whitespace
+" Highlight whitespace chars. Provide function :StripWhitespace
+Plug 'ntpeters/vim-better-whitespace'
+
+" https://github.com/plasticboy/vim-markdown
+Plug 'plasticboy/vim-markdown'
+
+" https://github.com/vim-syntastic/syntastic
+Plug 'vim-syntastic/syntastic'
+
+" https://github.com/preservim/nerdcommenter
+Plug 'preservim/nerdcommenter'
+
+" https://github.com/dhruvasagar/vim-table-mode
+Plug 'dhruvasagar/vim-table-mode'
+
+" https://github.com/junegunn/fzf.vim
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+
+call plug#end()
+
+let mapleader = ","
+
+" NERDTree shortcuts
+map <C-n> :NERDTreeFocus<CR>
+
+" FZF shortcut
+map <C-p> :FZF<CR>
+
+" why this in old vimrc file? map <silent> <C-n> :NERDTreeFocus<cr>
 " quick access to global buffer
 noremap <leader>y "+y
 noremap <leader>p "+p
-
-" delete line to blackhole register
-nnoremap <leader>d "_d
-
-nnoremap <F12> :buffers<CR>:buffer<Space>
 
 " Unmap c (not using it and can delete lines when using nerdcommenter)
 map c <Nop>
 
 " Avoid folding by default
 set foldlevelstart=99
-
-nnoremap <bs> X
-"set backspace=indent,eol,start
+" useless? let g:vim_markdown_folding_disabled = 1
 
 " searches to middle of the screen
 nnoremap n nzz
@@ -76,10 +69,28 @@ nnoremap N Nzz
 nnoremap <leader>w :set tw=80<CR>gqip:set tw=0<CR>
 vnoremap <leader>w :<backspace><backspace><backspace><backspace><backspace>set tw=80<CR>gvgq:set tw=0<CR>
 
-" markdown
-let g:vim_markdown_folding_disabled = 1
+"" Searching
+set hlsearch   " highlight matches
+set incsearch  " incremental searching
+set ignorecase " searches are case insensitive...
+set smartcase  " ... unless they contain at least one capital letter
 
-syn on
+" persistent undo
+set undodir=~/.vim/undodir
+set undofile
+
+" True colors, not only 8 bits
+set termguicolors
+
+" Ruler bar on
+set ruler
+
+" My custom "bash" syntax
+if exists("*SetFileTypeSH")
+  " Custom syntax file associations
+  au BufNewFile,BufRead .bashrc*,bashrc,bash_*,.bash_*, call SetFileTypeSH("bash")
+endif
+
 set nowrap
 set backspace=indent,eol,start
 set tabstop=4
@@ -88,34 +99,6 @@ set softtabstop=4
 set ul=500
 set expandtab
 set nu
-set background=dark
-
-"" Searching
-set hlsearch                    " highlight matches
-set incsearch                   " incremental searching
-set ignorecase                  " searches are case insensitive...
-set smartcase                   " ... unless they contain at least one capital letter
-
-autocmd BufRead,BufNewFile *.coffee,*.js,*.json setl ts=2 sw=2 sts=2
-
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:go_fmt_command = "goimports"
-" disable syntastic for java files
-let g:syntastic_mode_map = { 'passive_filetypes': ['java'] }
-
-" Go Highlighting
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_variable_declarations = 1
-let g:go_highlight_variable_assignments = 1
-let g:go_highlight_types = 1
-
-set ruler
-
-" persistent undo
-set undodir=~/.vim/undodir
-set undofile
-
-" True colors, not only 8 bits
-set termguicolors
+" backspace in cmd mod
+nnoremap <bs> X
 
