@@ -45,6 +45,14 @@ Plug 'junegunn/fzf.vim'
 
 " Color themes
 Plug 'fatih/molokai'
+" https://github.com/dracula/vim
+Plug 'dracula/vim', { 'as': 'dracula' }
+
+" vim-airline
+" https://github.com/vim-airline/vim-airline
+Plug 'vim-airline/vim-airline'
+" Automatically displays all buffers when there's only one tab open.
+let g:airline#extensions#tabline#enabled = 1
 
 " Deoplete Completion
 " https://github.com/Shougo/deoplete.nvim
@@ -66,19 +74,22 @@ call plug#end()
 
 let mapleader = ","
 
+" Delay the completion after input in milliseconds, default value: 0
+call deoplete#custom#option('auto_complete_delay', 200)
+map <leader>d :call deoplete#toggle()<CR>
+
 " NERDTree shortcuts
 map <C-n> :NERDTreeFocus<CR>
+" why this in old vimrc file? map <silent> <C-n> :NERDTreeFocus<cr>
+" Unmap c (not using it and can delete lines when using nerdcommenter)
+map c <Nop>
 
 " FZF shortcut
 map <C-p> :FZF<CR>
 
-" why this in old vimrc file? map <silent> <C-n> :NERDTreeFocus<cr>
 " quick access to global buffer
 noremap <leader>y "+y
 noremap <leader>p "+p
-
-" Unmap c (not using it and can delete lines when using nerdcommenter)
-map c <Nop>
 
 " Avoid folding by default
 set foldlevelstart=99
@@ -145,7 +156,7 @@ let g:syntastic_go_checkers = ['vet', 'golint', 'errcheck']
 let g:go_auto_type_info = 0
 
 " Theme
-colorscheme molokai
+colorscheme dracula
 
 " Prevent any unwanted initiative...
 set background=dark
