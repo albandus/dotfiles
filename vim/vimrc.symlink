@@ -47,6 +47,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'fatih/molokai'
 " https://github.com/dracula/vim
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'trapd00r/neverland-vim-theme'
 
 " vim-airline
 " https://github.com/vim-airline/vim-airline
@@ -156,7 +157,7 @@ let g:syntastic_go_checkers = ['vet', 'golint', 'errcheck']
 let g:go_auto_type_info = 0
 
 " Theme
-colorscheme dracula
+colorscheme neverland-darker
 
 " Prevent any unwanted initiative...
 set background=dark
