@@ -127,3 +127,6 @@ set undolevels=500
 " persistent undo
 set undodir=~/.vim/undodir
 set undofile
+
+" Change bracket highlighting, make it clear to known where is the cursor
+hi MatchParen cterm=underline ctermbg=none
