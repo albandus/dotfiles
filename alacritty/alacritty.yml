@@ -17,3 +17,10 @@ key_bindings:
         - { key: D, mods: Shift|Super, chars: "\x02\"" }
         # Tmux zoom
         - { key: Return, mods: Shift|Super, chars: "\x02z" }
+        # Tmux new tab
+        - { key: C, mods: Super, chars: "\x02c" }
+
+# Find keycodes:
+# showkey -a / showkey --scancodes
+# Save alacritty config file with wrong key names to get a list (alacritty auto
+# parse config and display error)
