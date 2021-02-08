@@ -24,9 +24,7 @@ Plug 'https://github.com/dhruvasagar/vim-table-mode'
 
 Plug 'https://github.com/preservim/nerdtree'
 Plug 'https://github.com/Xuyuanp/nerdtree-git-plugin'
-" Ctrl+n focus Nerd tree (no open/close), only focus
-map <C-n> :NERDTreeFocus<CR>
-" leader+n synchronize nerd tree with current file
+noremap <leader>o :NERDTreeToggle<CR>
 noremap <leader>n :NERDTreeFind<CR>
 
 Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
