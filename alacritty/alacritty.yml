@@ -18,7 +18,7 @@ key_bindings:
         # Tmux zoom
         - { key: Return, mods: Shift|Super, chars: "\x02z" }
         # Tmux new tab
-        - { key: C, mods: Super, chars: "\x02c" }
+        - { key: T, mods: Super, chars: "\x02c" }
 
 # Find keycodes:
 # showkey -a / showkey --scancodes
