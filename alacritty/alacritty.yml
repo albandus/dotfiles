@@ -7,7 +7,7 @@ key_bindings:
         - { key: Key3, mods: Super, chars: "\x023" }
         - { key: Key4, mods: Super, chars: "\x024" }
         - { key: Key5, mods: Super, chars: "\x025" }
-        - { key: Key5, mods: Super, chars: "\x026" }
+        - { key: Key6, mods: Super, chars: "\x026" }
         - { key: Key7, mods: Super, chars: "\x027" }
         - { key: Key8, mods: Super, chars: "\x028" }
         - { key: Key9, mods: Super, chars: "\x029" }
