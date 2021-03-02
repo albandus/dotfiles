@@ -128,3 +128,6 @@ set undofile
 
 " Change bracket highlighting, make it clear to known where is the cursor
 hi MatchParen cterm=underline ctermbg=none
+
+" Fix visual mode not working with some themes
+highlight Visual cterm=reverse ctermbg=NONE
