@@ -27,9 +27,13 @@ Plug 'https://github.com/Xuyuanp/nerdtree-git-plugin'
 noremap <leader>o :NERDTreeToggle<CR>
 noremap <leader>n :NERDTreeFind<CR>
 
+Plug 'https://github.com/editorconfig/editorconfig-vim'
+
 Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'https://github.com/junegunn/fzf.vim'
 nnoremap <C-z> :FZF<CR>
+nnoremap <C-a> :Buffers<CR>
+nnoremap <C-s> :History<CR>
 
 Plug 'https://github.com/preservim/nerdcommenter'
 
