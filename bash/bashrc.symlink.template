@@ -4,7 +4,7 @@
 # Export line: bootstrap script sets var
 DOTFILES_ROOT="BOOTSTRAP_DOTFILES_ROOT"
 
-export EDITOR=vim
+export EDITOR=nvim
 export LC_ALL=en_US.UTF-8
 export QUOTING_STYLE=literal
 
