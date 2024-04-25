@@ -11,3 +11,5 @@ anotes.md
 docker-compose.override.yml
 .DS_Store
 .php_cs.cache
+.yarn/
+.yarnrc.yml
