@@ -1,0 +1,90 @@
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 10.0
+
+[font.bold]
+family = "SourceCodePro"
+
+[font.italic]
+family = "SourceCodePro"
+
+[font.normal]
+family = "SourceCodePro"
+
+[[keyboard.bindings]]
+chars = "\u00021"
+key = "Key1"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u00022"
+key = "Key2"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u00023"
+key = "Key3"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u00024"
+key = "Key4"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u00025"
+key = "Key5"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u00026"
+key = "Key6"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u00027"
+key = "Key7"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u00028"
+key = "Key8"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u00029"
+key = "Key9"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u00020"
+key = "Key0"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0002%"
+key = "D"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0002\""
+key = "D"
+mods = "Shift|Alt"
+
+[[keyboard.bindings]]
+chars = "\u0002z"
+key = "Return"
+mods = "Shift|Alt"
+
+[[keyboard.bindings]]
+chars = "\u0002c"
+key = "T"
+mods = "Alt"
+
+# Find keycodes:
+# showkey -a / showkey --scancodes
+# Save alacritty config file with wrong key names to get a list (alacritty auto
+# parse config and display error)
+
