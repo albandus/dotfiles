@@ -7,11 +7,12 @@ return {
   },
   config = function ()
     require('nvim-treesitter.configs').setup {
-      -- Add languages to be installed here that you want installed for treesitter
+      -- Only here to avoid lsp errors
       -- sync_install = true,
       -- ignore_install = {},
       -- auto_install = true,
       -- modules = {},
+      -- Add languages to be installed here that you want installed for treesitter
       ensure_installed = { 'go', 'lua', 'rust', 'bash', 'fish', 'javascript', 'typescript', 'tsx', 'vim', 'python', 'graphql', 'json' },
 
       highlight = { enable = true },
