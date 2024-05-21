@@ -1,5 +1,0 @@
-hasDiff=$(git -C $DOTFILES_ROOT status --porcelain | wc -l)
-if [ $hasDiff -ne 0 ]
-then
-    echo "Dotfiles repository has uncommitted changes"
-fi

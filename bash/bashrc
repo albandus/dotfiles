@@ -1,0 +1,127 @@
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
+if [[ ! $TERM =~ screen ]]; then
+    tmux
+fi
+
+export EDITOR=nvim
+export LC_ALL=en_US.UTF-8
+export QUOTING_STYLE=literal
+export HISTCONTROL=ignoreboth
+export HISTSIZE='32768';
+export HISTFILESIZE="${HISTSIZE}";
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
+    if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+        ssh-agent > "$XDG_RUNTIME_DIR/ssh-agent.env"
+    fi
+    source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
+fi
+
+# enable color in some command output
+if [ -x /usr/bin/dircolors ]; then
+    alias ls='ls --color=auto'
+    alias grep='grep --color=auto'
+    alias diff='diff --color=auto'
+    alias ip='ip -color=auto'
+fi
+
+alias l='ls -l'
+alias la="ls -la"
+alias lh='ls -lh'
+
+alias c='grep -rnIi --color=always'
+# grep | less
+gl () {
+    grep -rnIi $@ --color=always | less -R
+}
+
+alias cls="clear && tmux clear-history"
+alias d="diff-so-fancy | less -R"
+alias hx="helix"
+alias n="nvim"
+alias publicip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
+
+#######################################
+### Prompt
+
+promptUser="$(whoami)"
+if [[ "${promptUser}" == "alban" ]]
+then
+    promptUser=""
+fi
+_dir_chomp () {
+    # First argument: path
+    # Second argument: length triggering path names chomp
+
+    # p: path replacing $HOME in path by ~
+    # b/s: ensure local variables
+    local p=${1/#$HOME/\~} b s
+    # s: length of path
+    s=${#p}
+    # while path still contain a "/", and length over max 
+    # ${p//\/} == replace all occurences of / in path
+    while [[ $p != "${p//\/}" ]]&&(($s>$2))
+    do
+        p=${p#/} # remove "/" as prefix
+        [[ $p =~ \.?. ]] # regexp: match eventual dot and first char
+        b=$b/${BASH_REMATCH[0]}
+        p=${p#*/} # remove processed dir
+        ((s=${#b}+${#p})) # update length
+    done
+    # $b: chomped and $p last dir or remaining path if shorter than max length
+    # ${b/\/~/\~}: remove "/" prefix in front of "~"
+    # ${b+/}: do not add a "/" if b is empty
+    echo ${b/\/~/\~}${b+/}$p
+}
+PS1="\[\e[0;36m\]\$(date +%H:%M) \[\e[0;33m\]${promptUser}\[\e[0;32m\]@\[\e[0;32m\]$(hostname) \[\e[1;34m\]\$(_dir_chomp \$(pwd) 20) \[\e[1;34m\]%\[\e[0;m\] "
+
+#######################################
+### Git shortcuts
+
+g() { if [[ $# > 0 ]]; then git "$@"; else git status; fi; }
+# Enable git bash completion on g function
+if [ -r /usr/share/bash-completion/completions/git ]
+then
+    source /usr/share/bash-completion/completions/git
+    __git_complete g __git_main
+fi
+alias gsl="git stash list"
+gss() { if [[ $# = 1 ]]; then git stash save "$1"; else echo "Stash name required."; fi; }
+gsa() { git stash apply stash@{$1}; }
+gsd() { git stash drop stash@{$1}; }
+
+#######################################
+
+DOTFILES_DIR="$HOME/.$USER/dotfiles"
+hasDiff=$(git -C $DOTFILES_DIR status --porcelain | wc -l)
+if [ $hasDiff -ne 0 ]
+then
+    echo "Dotfiles repository has uncommitted changes"
+fi
+
+#######################################
+
+# Custom script/bin folder
+PATH="$PATH:$HOME/.$USER/bin"
+
+export GOPATH="$HOME/.go"
+export PATH="$PATH:$GOPATH/bin"
+
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+
+# Used by: poetry, getnf
+export PATH="/home/alban/.local/bin:$PATH"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+#######################################
+
+[ -f ~/.local_bashrc ] && source ~/.local_bashrc
+
