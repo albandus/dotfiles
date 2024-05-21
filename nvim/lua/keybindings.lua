@@ -23,3 +23,6 @@ vim.api.nvim_set_keymap("n", "<leader>,", ':vertical resize -15<CR>', { noremap 
 -- LSP next/prev diagnostic: form some reason does not work if set in "lsp.lua" with other keybindings
 vim.keymap.set("n", "<leader>]", vim.diagnostic.goto_next, {desc = "Goto next diagnostic"})
 vim.keymap.set("n", "<leader>[", vim.diagnostic.goto_prev, {desc = "Goto previous diagnostic"})
+
+-- delete current buffer (and remove it from buffer list)
+vim.api.nvim_set_keymap("n", '<C-q>', ':bd<CR>', { noremap = true, silent = true, desc = "Barbar: Close current buffer" })

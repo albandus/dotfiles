@@ -24,11 +24,11 @@ return {
       semantic_letters = false,
     })
 
-    -- close current buffer (and remove it from buffer list)
-    vim.api.nvim_set_keymap("n", '<C-q>', ':BufferClose<CR>', { noremap = true, silent = true, desc = "Barbar: Close current buffer" })
     -- go to next and previous buffers
     vim.api.nvim_set_keymap('n', 'gn', ':BufferNext<CR>', { noremap = true, silent = true, desc = "Barbar: Go to next buffer" })
+    vim.api.nvim_set_keymap('n', 'g<Right>', ':BufferNext<CR>', { noremap = true, silent = true, desc = "Barbar: Go to next buffer" })
     vim.api.nvim_set_keymap('n', 'gp', ':BufferPrevious<CR>', { noremap = true, silent = true, desc = "Barbar: Go to previous buffer" })
+    vim.api.nvim_set_keymap('n', 'g<Left>', ':BufferPrevious<CR>', { noremap = true, silent = true, desc = "Barbar: Go to previous buffer" })
     -- pick buffer
     vim.api.nvim_set_keymap('n', '<leader>g', ':BufferPick<CR>', { noremap = true, silent = true, desc = "Barbar: pick buffer" })
   end

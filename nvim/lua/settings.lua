@@ -16,7 +16,7 @@ vim.o.scrolloff = 8
 
 -- persistent undo
 local prefix = vim.fn.expand("~")
-vim.o.undodir = prefix .. '/.nvim_undo/'
+vim.o.undodir = prefix .. '/.config/nvim/undo/'
 vim.o.undofile = true
 
 -- No wrap by default
@@ -28,14 +28,13 @@ vim.o.updatetime = 500
 -- Force sign column (avoid diff in display margins with files without git diff)
 vim.wo.signcolumn = 'yes'
 
-vim.o.textwidth=80
+-- By default textwidth autowrap text in insert mode, changing textwidth allow
+-- to format only with gq, or while typing comment (letter c)
+-- See :help formatoptions
+vim.o.textwidth = 80
+vim.o.formatoptions = 'cqjl'
 
--- From old vim config
--- Highlight whitespace chars. Provide function :StripWhitespace
--- Plug 'https://github.com/ntpeters/vim-better-whitespace'
---
---Custom names to force "bash" syntax detection
---if exists("*SetFileTypeSH")
---  " Custom syntax file associations
---  au BufNewFile,BufRead .bashrc*,bashrc,bash_*,.bash_*, call SetFileTypeSH("bash")
---endif
+vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
+    pattern = { ".local_bashrc" },
+    command = "set filetype=bash",
+})

@@ -73,11 +73,6 @@ return {
           },
         },
       }
-      -- Not working...
-      -- lsp["pyright"].setup{}
-      -- lsp["pylsp"].setup {
-      --   filetypes = { 'py' }
-      -- }
 
       -- Auto format go imports, source:
       -- https://github.com/golang/tools/blob/master/gopls/doc/vim.md#neovim-imports
@@ -126,5 +121,16 @@ return {
         },
       })
     end
-  }
+  },
+  {
+    "HallerPatrick/py_lsp.nvim",
+    config = function()
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      require'py_lsp'.setup({
+        source_strategies = {"poetry", "default", "system"},
+          on_attach = on_attach,
+          capabilities = capabilities,
+      })
+    end,
+  },
 }

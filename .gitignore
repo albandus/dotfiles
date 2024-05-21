@@ -1,3 +1,3 @@
-bash/bashrc.symlink
 git/gitconfig.symlink
 bin
+nvim/undo

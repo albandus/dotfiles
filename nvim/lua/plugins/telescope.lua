@@ -37,6 +37,7 @@ return {
       vim.keymap.set('n', '<leader>b', require('telescope.builtin').buffers, { desc = 'Telescope: existing buffers' })
       vim.keymap.set('n', '<leader>f', require('telescope.builtin').find_files, { desc = 'Telescope: file picker' })
       vim.keymap.set('n', '<leader>/', require('telescope').extensions.live_grep_args.live_grep_args, { desc = 'Telescope: live grep' })
+      vim.keymap.set('n', '<leader>m', require('telescope.builtin').resume, { desc = 'Telescope: resume' })
       vim.keymap.set('n', '<leader>\'', require('telescope.builtin').registers, { desc = 'Telescope: registers' })
       vim.keymap.set('n', '<F8>', ":lua require('telescope').extensions.menu.menu({})<CR>", { desc =  'Telescope: menu' })
 
