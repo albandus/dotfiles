@@ -1,0 +1,30 @@
+[advice]
+    detachedHead = false
+[alias]
+    co = checkout
+    br = branch
+    bra = branch -avv
+    fa = fetch --all --tags --prune
+    tagcommit = rev-list -n 1
+
+    # Diff on given number of latest commits
+    dif = "!r() { git diff HEAD~$1 HEAD; }; r"
+    # Interactive rebase with the given number of latest commits
+    reb = "!r() { git rebase -i HEAD~$1; }; r"
+    # List commits, short form with log messages, one liner.
+    ls = "log --oneline --graph --pretty=format:'%C(red)%h %Creset%s %C(blue)%an %C(green)%ci %C(yellow)%d %Creset'"
+    # List commits, with modified files
+    #ll = "log --pretty=format:"%C(red)%h%Cred%d\\ %Creset%s%Cblue\\ %cn" --decorate --numstat"
+    ll = "log --numstat --pretty=format:'%C(red)%h %Creset%s %C(blue)%an %C(green)%ci %C(yellow)%d %Creset'"
+[include]
+    path = ~/.config/git/local_config
+[init]
+    defaultBranch = main
+[core]
+    excludesfile = ~/.alban/dotfiles/git/gitignore
+[pull]
+    rebase = true
+[push]
+    default = simple
+[switch]
+    detachedHead = false
