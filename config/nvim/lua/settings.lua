@@ -38,3 +38,7 @@ vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
     pattern = { ".local_bashrc" },
     command = "set filetype=bash",
 })
+vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
+    pattern = { ".local_gitconfig", "*/git/config" },
+    command = "set filetype=gitconfig",
+})
