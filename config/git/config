@@ -16,7 +16,7 @@
     # List commits, with modified files
     ll = "log --numstat --pretty=format:'%C(red)%h %Creset%s %C(blue)%an %C(green)%ci %C(yellow)%d %Creset'"
 [include]
-    path = ~/.config/git/local_config
+    path = ~/.local_gitconfig
 [init]
     defaultBranch = main
 [core]

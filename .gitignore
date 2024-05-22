@@ -1,3 +1,2 @@
-git/gitconfig.symlink
-bin
-nvim/undo
+config/nvim/undo
+config/tmux/plugins/tpm
