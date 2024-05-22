@@ -41,9 +41,11 @@ gl () {
 }
 
 alias cls="clear && tmux clear-history"
-alias d="diff-so-fancy | less -R"
 alias hx="helix"
 alias n="nvim"
+alias ysearch="yay -Slq | fzf --no-mouse --preview 'yay -Si {}' --layout=reverse"
+alias yinstalled="yay -Qq | fzf --no-mouse --preview 'yay -Qil {}' --layout=reverse --bind 'enter:execute(yay -Qil {} | less)'"
+alias d="diff-so-fancy | less -R"
 alias publicip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
 
