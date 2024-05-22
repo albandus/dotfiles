@@ -1,10 +1,6 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-if [[ ! $TERM =~ screen ]]; then
-    tmux
-fi
-
 export EDITOR=nvim
 export LC_ALL=en_US.UTF-8
 export QUOTING_STYLE=literal
@@ -24,6 +20,7 @@ fi
 
 # enable color in some command output
 if [ -x /usr/bin/dircolors ]; then
+    eval `dircolors`
     alias ls='ls --color=auto'
     alias grep='grep --color=auto'
     alias diff='diff --color=auto'
@@ -126,4 +123,8 @@ export PATH="/home/alban/.local/bin:$PATH"
 #######################################
 
 [ -f ~/.local_bashrc ] && source ~/.local_bashrc
+
+if [[ ! $TERM =~ screen ]]; then
+    tmux
+fi
 
