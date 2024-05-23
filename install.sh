@@ -6,6 +6,7 @@ hash stow 2> /dev/null || { echo >&2 "stow not installed"; exit 1; }
 
 mkdir -p ~/.config
 mkdir -p ~/.$USER/bin
+mkdir -p ~/.$USER/XDG_PublicShare_Dir
 stow -v -d home -t ~ .
 stow -v -d config -t ~/.config .
 if [ ! -f ~/.local_tmux.conf ]
