@@ -30,6 +30,8 @@ fi
 alias l='ls -l'
 alias la="ls -la"
 alias lh='ls -lh'
+# ripgrep: disable very long lines
+alias rg='rg -M 500'
 
 alias c='grep -rnIi --color=always'
 # grep | less
