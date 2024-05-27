@@ -58,7 +58,6 @@ then
 fi
 _dir_chomp () {
     # First argument: path
-    # Second argument: length triggering path names chomp
 
     # p: path replacing $HOME in path by ~
     # b/s: ensure local variables
@@ -67,10 +66,10 @@ _dir_chomp () {
     s=${#p}
     # while path still contain a "/", and length over max 
     # ${p//\/} == replace all occurences of / in path
-    while [[ $p != "${p//\/}" ]]&&(($s>$2))
+    while [[ $p != "${p//\/}" ]]&&(($s>20))
     do
         p=${p#/} # remove "/" as prefix
-        [[ $p =~ \.?. ]] # regexp: match eventual dot and first char
+        [[ $p =~ \.?[^/]{1,2} ]] # regexp: match eventual dot and 2 first chars
         b=$b/${BASH_REMATCH[0]}
         p=${p#*/} # remove processed dir
         ((s=${#b}+${#p})) # update length
@@ -80,7 +79,7 @@ _dir_chomp () {
     # ${b+/}: do not add a "/" if b is empty
     echo ${b/\/~/\~}${b+/}$p
 }
-PS1="\[\e[0;36m\]\$(date +%H:%M) \[\e[0;33m\]${promptUser}\[\e[0;32m\]@\[\e[0;32m\]$(hostname) \[\e[1;34m\]\$(_dir_chomp \$(pwd) 20) \[\e[1;34m\]%\[\e[0;m\] "
+PS1="\[\e[0;36m\]\$(date +%H:%M) \[\e[0;33m\]${promptUser}\[\e[0;32m\]@\[\e[0;32m\]$(hostname) \[\e[1;34m\]\$(_dir_chomp \$(pwd)) \[\e[1;34m\]%\[\e[0;m\] "
 
 #######################################
 ### Git shortcuts
