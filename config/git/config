@@ -15,6 +15,10 @@
     ls = "log --oneline --graph --pretty=format:'%C(red)%h %Creset%s %C(blue)%an %C(green)%ci %C(yellow)%d %Creset'"
     # List commits, with modified files
     ll = "log --numstat --pretty=format:'%C(red)%h %Creset%s %C(blue)%an %C(green)%ci %C(yellow)%d %Creset'"
+[diff]
+	tool = nvimdiff
+[difftool]
+	prompt = false
 [include]
     path = ~/.local_gitconfig
 [init]
