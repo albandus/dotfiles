@@ -20,7 +20,7 @@
 [init]
     defaultBranch = main
 [core]
-    excludesfile = ~/.alban/dotfiles/git/gitignore
+    excludesfile = ~/.config/git/gitignore
 [pull]
     rebase = true
 [push]
