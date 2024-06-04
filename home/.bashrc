@@ -79,7 +79,7 @@ _dir_chomp () {
     # ${b+/}: do not add a "/" if b is empty
     echo ${b/\/~/\~}${b+/}$p
 }
-PS1="\[\e[0;36m\]\$(date +%H:%M) \[\e[0;33m\]${promptUser}\[\e[0;32m\]@\[\e[0;32m\]$(hostname) \[\e[1;34m\]\$(_dir_chomp \$(pwd)) \[\e[1;34m\]%\[\e[0;m\] "
+PS1="\[\e[0;36m\]\$(date +%H:%M) \[\e[0;33m\]${promptUser}\[\e[0;32m\]@\[\e[0;32m\]$(hostname) \[\e[1;34m\]\$(_dir_chomp \"\$(pwd)\") \[\e[1;34m\]%\[\e[0;m\] "
 
 #######################################
 ### Git shortcuts
