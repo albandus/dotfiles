@@ -99,10 +99,15 @@ gsd() { git stash drop stash@{$1}; }
 #######################################
 
 DOTFILES_DIR="$HOME/.$USER/dotfiles"
-hasDiff=$(git -C $DOTFILES_DIR status --porcelain | wc -l)
-if [ $hasDiff -ne 0 ]
+# Tests to avoid unwanted errors on uncommon config (for example, an aws
+# instance, with "ubuntu" user)
+if [ -d "$DOTFILES_DIR" ]
 then
-    echo "Dotfiles repository has uncommitted changes"
+    hasDiff=$(git -C $DOTFILES_DIR status --porcelain | wc -l)
+    if [ $hasDiff -ne 0 ]
+    then
+        echo "Dotfiles repository has uncommitted changes"
+    fi
 fi
 
 #######################################
@@ -117,7 +122,7 @@ export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
 # Used by: poetry, getnf
-export PATH="/home/alban/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
