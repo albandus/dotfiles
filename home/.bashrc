@@ -131,6 +131,6 @@ export PATH="$HOME/.local/bin:$PATH"
 [ -f ~/.local_bashrc ] && source ~/.local_bashrc
 
 if [[ ! $TERM =~ screen ]]; then
-    tmux
+    [[ -n "$(type -p tmux)" ]] && tmux
 fi
 
