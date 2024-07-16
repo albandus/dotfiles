@@ -1,0 +1,56 @@
+{
+    "workbench.startupEditor": "none",
+    "workbench.activityBar.location": "hidden",
+    "highlight.regexes": {
+      // Darker background, and border around `something` in lines
+      "([^`])(`[^`]+?`)": {
+        "filterLanguageRegex": "markdown",
+        "regexFlags": "g",
+        "filterFileRegex": ".*\\.md",
+        "decorations": [{}, {
+          "backgroundColor": "#12121233",
+          "border": "#505050",
+          "borderStyle": "dashed",
+          "borderWidth": "1px"
+          }, {}]
+        },
+        // Darker backgrounds for codeblocks
+        // For all decoration options, see:
+        // https://code.visualstudio.com/api/references/vscode-api#DecorationRenderOptions
+        "(```.+?```)": {
+          "regexFlags": "gs",
+          "decorations": [{
+            "backgroundColor": "#12121233",
+            "isWholeLine": true,
+          }],
+          "filterLanguageRegex": "markdown",
+          "filterFileRegex": ".*\\.md"
+        },
+        // Highlight "@text"
+        "(@[a-z0-9]*)[\\s|:]": {
+          "filterLanguageRegex": "markdown",
+          "filterFileRegex": ".*\\.md",
+          "decorations": [
+            {            
+            "color": "#95b377"
+          }
+        ]
+      }
+    },
+      "editor.lightbulb.enabled": "off",
+    "editor.autoClosingBrackets": "never",
+    "editor.autoClosingQuotes": "never",
+    "editor.autoClosingOvertype": "never",
+    "editor.autoClosingDelete": "never",
+    "editor.fontFamily": "'Source code pro','Droid Sans Mono', 'monospace', monospace",
+    "editor.fontWeight": "400",
+    "explorer.confirmDelete": false,
+    "editor.fontSize": 13,
+    "files.exclude": {
+      "**/.stfolder": true
+    },
+    "workbench.colorTheme": "Catppuccin Mocha",
+    "breadcrumbs.enabled": false,
+    "git.openRepositoryInParentFolders": "never",
+    "editor.copyWithSyntaxHighlighting": false
+}
