@@ -52,5 +52,6 @@
     "workbench.colorTheme": "Catppuccin Mocha",
     "breadcrumbs.enabled": false,
     "git.openRepositoryInParentFolders": "never",
-    "editor.copyWithSyntaxHighlighting": false
+    "editor.copyWithSyntaxHighlighting": false,
+    "editor.stickyScroll.enabled": false
 }
