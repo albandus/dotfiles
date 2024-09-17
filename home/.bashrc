@@ -1,6 +1,8 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+[ -f ~/.local_bashrc ] && source ~/.local_bashrc
+
 export EDITOR=nvim
 export LC_ALL=en_US.UTF-8
 export QUOTING_STYLE=literal
@@ -21,12 +23,16 @@ fi
 # enable color in some command output
 if [ -x /usr/bin/dircolors ]; then
     eval `dircolors`
-    alias ls='ls --color=auto'
-    alias grep='grep --color=auto'
-    alias diff='diff --color=auto'
-    alias ip='ip -color=auto'
+fi
+if [ "$(uname -s)" == "Darwin" ]
+then
+    export CLICOLOR="xterm"
 fi
 
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias diff='diff --color=auto'
+alias ip='ip -color=auto'
 alias l='ls -l'
 alias la="ls -la"
 alias lh='ls -lh'
@@ -52,10 +58,16 @@ alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.ar
 ### Prompt
 
 promptUser="$(whoami)"
-if [[ "${promptUser}" == "alban" ]]
+if [[ "${promptUser}" == "${HIDE_USER_IN_PROMPT:-alban}" ]]
 then
     promptUser=""
 fi
+promptHostname="$(hostname)"
+if [[ "${promptHostname}" == "${HIDE_HOSTNAME_IN_PROMPT}" ]]
+then
+    promptHostname=""
+fi
+
 _dir_chomp () {
     # First argument: path
 
@@ -79,7 +91,8 @@ _dir_chomp () {
     # ${b+/}: do not add a "/" if b is empty
     echo ${b/\/~/\~}${b+/}$p
 }
-PS1="\[\e[0;36m\]\$(date +%H:%M) \[\e[0;33m\]${promptUser}\[\e[0;32m\]@\[\e[0;32m\]$(hostname) \[\e[1;34m\]\$(_dir_chomp \"\$(pwd)\") \[\e[1;34m\]%\[\e[0;m\] "
+PS1="\[\e[0;36m\]\$(date +%H:%M) \[\e[0;33m\]${promptUser}\[\e[0;32m\]@\[\e[0;32m\]${promptHostname} \[\e[1;34m\]\$(_dir_chomp \"\$(pwd)\") \[\e[1;34m\]%\[\e[0;m\] "
+
 
 #######################################
 ### Git shortcuts
@@ -95,6 +108,17 @@ alias gsl="git stash list"
 gss() { if [[ $# = 1 ]]; then git stash save "$1"; else echo "Stash name required."; fi; }
 gsa() { git stash apply stash@{$1}; }
 gsd() { git stash drop stash@{$1}; }
+
+#######################################
+### Bash completion
+# mac-os only, no need on linux
+# Require brew install bash_completion@2
+
+if [ -r /opt/homebrew/etc/profile.d/bash_completion.sh ]
+then
+    source /opt/homebrew/etc/profile.d/bash_completion.sh
+    __git_complete g __git_main
+fi
 
 #######################################
 
@@ -127,8 +151,6 @@ export PATH="$HOME/.local/bin:$PATH"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 #######################################
-
-[ -f ~/.local_bashrc ] && source ~/.local_bashrc
 
 if [[ ! $TERM =~ screen ]]; then
     [[ -n "$(type -p tmux)" ]] && tmux

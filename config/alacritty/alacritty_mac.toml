@@ -1,0 +1,105 @@
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 11.0
+
+# Require NerdFont (for neovim tree plugin):
+# View list: brew search nerd-font
+# SourceCodePro modded: brew install font-sauce-code-pro-nerd-font
+
+# Find font name for config file:
+# brew install fontconfig
+# fc-list : family | sort -f | grep Nerd
+# Example output line: SauceCodePro Nerd Font Mono,SauceCodePro NFM
+#                      Font name, Abbreviated font name
+[font.bold]
+family = "SauceCodePro NFM"
+style = "SemiBold"
+
+[font.italic]
+family = "SauceCodePro NFM"
+style = "Light"
+
+[font.normal]
+family = "SauceCodePro NFM"
+
+[window]
+decorations = "None"
+startup_mode = "Maximized"
+
+[[keyboard.bindings]]
+chars = "\u00021"
+key = "Key1"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u00022"
+key = "Key2"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u00023"
+key = "Key3"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u00024"
+key = "Key4"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u00025"
+key = "Key5"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u00026"
+key = "Key6"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u00027"
+key = "Key7"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u00028"
+key = "Key8"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u00029"
+key = "Key9"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u00020"
+key = "Key0"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u0002%"
+key = "D"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u0002\""
+key = "D"
+mods = "Shift|Super"
+
+[[keyboard.bindings]]
+chars = "\u0002z"
+key = "Return"
+mods = "Shift|Super"
+
+[[keyboard.bindings]]
+chars = "\u0002c"
+key = "T"
+mods = "Super"
+
+# Find keycodes:
+# showkey -a / showkey --scancodes
+# Save alacritty config file with wrong key names to get a list (alacritty auto
+# parse config and display error)
+
