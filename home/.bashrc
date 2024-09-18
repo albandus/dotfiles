@@ -122,7 +122,7 @@ fi
 
 #######################################
 
-DOTFILES_DIR="$HOME/.$USER/dotfiles"
+DOTFILES_DIR="${DOTFILES_DIR:-$HOME/.$USER/dotfiles}"
 # Tests to avoid unwanted errors on uncommon config (for example, an aws
 # instance, with "ubuntu" user)
 if [ -d "$DOTFILES_DIR" ]
