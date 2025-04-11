@@ -2,6 +2,8 @@
     detachedHead = false
 [alias]
     co = checkout
+    coma = commit --amend
+    coman = commit --amend --no-edit
     br = branch
     bra = branch -avv
     fa = fetch --all --tags --prune
@@ -12,7 +14,7 @@
     # Interactive rebase with the given number of latest commits
     reb = "!r() { git rebase -i HEAD~$1; }; r"
     # List commits, short form with log messages, one liner.
-    ls = "log --oneline --graph --pretty=format:'%C(red)%h %Creset%s %C(blue)%an %C(green)%ci %C(yellow)%d %Creset'"
+    l = "log --oneline --graph --pretty=format:'%C(red)%h %Creset%s %C(blue)%an %C(green)%ci %C(yellow)%d %Creset'"
     # List commits, with modified files
     ll = "log --numstat --pretty=format:'%C(red)%h %Creset%s %C(blue)%an %C(green)%ci %C(yellow)%d %Creset'"
 [diff]
