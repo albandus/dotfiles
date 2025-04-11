@@ -1,10 +1,8 @@
 local on_attach = function(client, bufnr)
-  -- NOTE: Remember that lua is a real programming language, and as such it is possible
-  -- to define small helper and utility functions so you don't have to repeat yourself
-  -- many times.
-  --
-  -- In this case, we create a function that lets us more easily define mappings specific
-  -- for LSP related items. It sets the mode, buffer and description for us each time.
+  -- Helper to set shortcuts (auto noremap, silent...)
+  -- Key / Shortcut
+  -- Function to call
+  -- Decription for mini.clue
   local nmap = function(keys, func, desc)
     if desc then
       desc = 'LSP: ' .. desc
@@ -50,11 +48,15 @@ return {
       lsp["biome"].setup {
         on_attach = on_attach,
       }
+      -- See: https://github.com/LuaLS/lua-language-server
+      -- And: https://luals.github.io/#neovim-install
       lsp["lua_ls"].setup {
+        on_attach = on_attach,
         settings = {
           Lua = {
             runtime = {
-              -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+              -- Tell the language server which version of Lua you're using
+              -- (most likely LuaJIT in the case of Neovim)
               version = 'LuaJIT',
             },
             diagnostics = {
@@ -66,14 +68,37 @@ return {
               library = vim.api.nvim_get_runtime_file("", true),
               checkThirdParty = false
             },
-            -- Do not send telemetry data containing a randomized but unique identifier
+            -- Do not send telemetry data containing a randomized but unique
+            -- identifier
             telemetry = {
               enable = false,
             },
           },
         },
+        lsp["pylsp"].setup {
+          on_attach = on_attach,
+          settings = {
+            pylsp = {
+              plugins = {
+                -- formatter options
+                black = { enabled = true },
+                autopep8 = { enabled = false },
+                yapf = { enabled = false },
+                -- linter options
+                pylint = { enabled = true, executable = "pylint" },
+                pyflakes = { enabled = false },
+                pycodestyle = { enabled = false },
+                -- type checker
+                pylsp_mypy = { enabled = true },
+                -- auto-completion options
+                jedi_completion = { fuzzy = true },
+                -- import sorting
+                pyls_isort = { enabled = true },
+              },
+            },
+          },
+        },
       }
-
       -- Auto format go imports, source:
       -- https://github.com/golang/tools/blob/master/gopls/doc/vim.md#neovim-imports
       vim.api.nvim_create_autocmd("BufWritePre", {
@@ -100,37 +125,37 @@ return {
       })
     end
   },
-  {
-    "jose-elias-alvarez/typescript.nvim",
-    config = function()
-      local lsp = require("lspconfig")
-      require("typescript").setup({
-        disable_commands = false, -- prevent the plugin from creating Vim commands
-        debug = false,            -- enable debug logging for commands
-        go_to_source_definition = {
-          fallback = true,        -- fall back to standard LSP definition on failure
-        },
-        server = {                -- pass options to lspconfig's setup method
-          on_attach = function(client, bufnr)
-            client.server_capabilities.documentFormattingProvider = false
-
-            on_attach(client, bufnr)
-          end,
-          root_dir = lsp.util.root_pattern("package.json"),
-          single_file_support = false,
-        },
-      })
-    end
-  },
-  {
-    "HallerPatrick/py_lsp.nvim",
-    config = function()
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      require'py_lsp'.setup({
-        source_strategies = {"poetry", "default", "system"},
-          on_attach = on_attach,
-          capabilities = capabilities,
-      })
-    end,
-  },
+  -- {
+  --   "jose-elias-alvarez/typescript.nvim",
+  --   config = function()
+  --     local lsp = require("lspconfig")
+  --     require("typescript").setup({
+  --       disable_commands = false, -- prevent the plugin from creating Vim commands
+  --       debug = false,            -- enable debug logging for commands
+  --       go_to_source_definition = {
+  --         fallback = true,        -- fall back to standard LSP definition on failure
+  --       },
+  --       server = {                -- pass options to lspconfig's setup method
+  --         on_attach = function(client, bufnr)
+  --           client.server_capabilities.documentFormattingProvider = false
+  --
+  --           on_attach(client, bufnr)
+  --         end,
+  --         root_dir = lsp.util.root_pattern("package.json"),
+  --         single_file_support = false,
+  --       },
+  --     })
+  --   end
+  -- },
+  -- {
+  --   "HallerPatrick/py_lsp.nvim",
+  --   config = function()
+  --     local capabilities = vim.lsp.protocol.make_client_capabilities()
+  --     require'py_lsp'.setup({
+  --       source_strategies = {"poetry", "default", "system"},
+  --         on_attach = on_attach,
+  --         capabilities = capabilities,
+  --     })
+  --   end,
+  -- },
 }

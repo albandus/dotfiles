@@ -1,4 +1,5 @@
 return {
+  -- https://github.com/nvim-treesitter/nvim-treesitter
   'nvim-treesitter/nvim-treesitter',
   version = false, -- last release way too old
   build = ":TSUpdate",
@@ -13,7 +14,7 @@ return {
       -- auto_install = true,
       -- modules = {},
       -- Add languages to be installed here that you want installed for treesitter
-      ensure_installed = { 'go', 'lua', 'rust', 'bash', 'fish', 'javascript', 'typescript', 'tsx', 'vim', 'python', 'graphql', 'json' },
+      ensure_installed = { 'go', 'lua', 'rust', 'bash', 'javascript', 'typescript', 'tsx', 'vim', 'python', 'json', 'toml', 'yaml', 'xml', 'terraform', 'ruby' },
 
       highlight = { enable = true },
       indent = { enable = true },

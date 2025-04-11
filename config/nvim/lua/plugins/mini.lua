@@ -1,3 +1,4 @@
+-- https://github.com/echasnovski/mini.nvim
 return {
   {
     'echasnovski/mini.nvim',
@@ -34,6 +35,7 @@ return {
         },
       })
       -- help panel, copy / paste from mini.clue doc
+      -- https://github.com/echasnovski/mini.clue?tab=readme-ov-file#default-config
       local miniclue = require('mini.clue')
       miniclue.setup({
         triggers = {
@@ -78,6 +80,7 @@ return {
           miniclue.gen_clues.z(),
         },
         window = {
+          delay = 500,
           config = {
             width = "auto"
           }
@@ -85,6 +88,7 @@ return {
       })
 
       -- auto-completion
+      -- https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-completion.md
       require("mini.completion").setup()
       -- Use `<Tab>` and `<S-Tab>` for navigation through completion list (source: :help mini.completion)
       vim.keymap.set('i', '<Tab>',   [[pumvisible() ? "\<C-n>" : "\<Tab>"]],   { expr = true })

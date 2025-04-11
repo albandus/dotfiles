@@ -5,6 +5,7 @@ vim.g.loaded_netrwPlugin = 1
 vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { silent = true, desc = "NvimTree: toggle" })
 vim.keymap.set("n", "<leader>o", ":NvimTreeFindFile<CR>", { silent = true, desc = "NvimTree: find in tree" })
 
+-- https://github.com/nvim-tree/nvim-tree.lua
 return {
   'nvim-tree/nvim-tree.lua',
   dependencies = {
