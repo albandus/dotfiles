@@ -135,6 +135,10 @@ fi
 
 #######################################
 
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+#######################################
+
 DOTFILES_DIR="${DOTFILES_DIR:-$HOME/.$USER/dotfiles}"
 # Tests to avoid unwanted errors on uncommon config (for example, an aws
 # instance, with "ubuntu" user)
@@ -176,9 +180,17 @@ then
 fi
 
 #######################################
+# Auto-launch tmux, set shortcuts to swtich colors
 
-if [[ ! $TERM =~ screen ]]; then
-    [[ -n "$(type -p tmux)" ]] && tmux
+if command -v tmux>/dev/null; then
+    [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && tmux new-session -A -s main
+
+    # check if we have been switched to light, else go dark
+    [[ ! $(tmux show-environment | grep THEME) =~ 'THEME=light' ]] &&
+    tmux set-environment THEME dark
 fi
+alias tmain="tmux new-session -A -s main"
+alias jour="tmux source-file $DOTFILES_DIR/config/tmux/tmux_light.conf; tmux set-environment THEME 'light'"
+alias nuit="tmux source-file $DOTFILES_DIR/config/tmux/tmux_dark.conf; tmux set-environment THEME 'dark'"
 
 # source "$HOME/.profile.d/clifen.sh"
