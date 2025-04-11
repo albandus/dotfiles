@@ -1,6 +1,14 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+__add_path_entry() {
+    case ":$PATH:" in
+      *":$1:"*) :;; # already there
+      *) PATH="$1:$PATH";; # or PATH="$PATH:$new_entry"
+    esac
+}
+
+CUSTOM_BIN="$HOME/.$USER/bin"
 [ -f ~/.local_bashrc ] && source ~/.local_bashrc
 
 export EDITOR=nvim
@@ -142,18 +150,30 @@ fi
 #######################################
 
 # Custom script/bin folder
-PATH="$PATH:$HOME/.$USER/bin"
+__add_path_entry "$CUSTOM_BIN"
 
 export GOPATH="$HOME/.go"
-export PATH="$PATH:$GOPATH/bin"
+__add_path_entry "$GOPATH/bin"
 
 export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
+__add_path_entry "$VOLTA_HOME/bin"
 
-# Used by: poetry, getnf
-export PATH="$HOME/.local/bin:$PATH"
+__add_path_entry "$HOME/.local/bin"
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+if type pyenv >/dev/null 2>&1
+then
+    eval "$(pyenv init -)"
+fi
+
+if type rbenv >/dev/null 2>&1
+then
+    # rbenv, require check, not able to properly manage if it is already there
+    # Check: if ~/.rbenv/shims already in path
+    case ":$PATH:" in
+      *":$HOME/.rbenv/shims:"*) :;; # already there
+      *) eval "$(rbenv init - --no-rehash bash)"
+    esac
+fi
 
 #######################################
 
@@ -161,3 +181,4 @@ if [[ ! $TERM =~ screen ]]; then
     [[ -n "$(type -p tmux)" ]] && tmux
 fi
 
+# source "$HOME/.profile.d/clifen.sh"
