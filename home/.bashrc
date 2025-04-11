@@ -38,6 +38,12 @@ alias lh='ls -lh'
 # ripgrep: disable very long lines
 alias rg='rg -M 500'
 
+docker-rmi-all-force() {
+    docker stop $(docker ps -q)
+    docker rm $(docker ps -a -q)
+    docker rmi $(docker images -q) --force
+}
+
 alias c='grep -rnIi --color=always'
 # grep | less
 gl () {
