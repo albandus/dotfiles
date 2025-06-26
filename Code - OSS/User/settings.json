@@ -55,5 +55,9 @@
     "security.workspace.trust.untrustedFiles": "open",
     "workbench.activityBar.location": "hidden",
     "workbench.colorTheme": "Catppuccin Mocha",
-    "workbench.startupEditor": "none"
+    "workbench.startupEditor": "none",
+    "markdown-table-formatter.markdownGrammarScopes": [
+      "markdown",
+      "plaintext"
+    ]
 }
