@@ -21,11 +21,18 @@ export HISTFILESIZE="${HISTSIZE}";
 # append to the history file, don't overwrite it
 shopt -s histappend
 
-sshAgentFile="$HOME/.ssh/ssh-agent.env"
-if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-    ssh-agent -t 40h > "$sshAgentFile"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    sshAgentFile="$HOME/.ssh/ssh-agent.env"
+    if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+        ssh-agent -t 40h > "$sshAgentFile"
+    fi
+    source "$sshAgentFile" > /dev/null
+elif [[ ! -S "$SSH_AUTH_SOCK" ]]; then
+    if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+        ssh-agent > "$XDG_RUNTIME_DIR/ssh-agent.env"
+    fi
+    source "$XDG_RUNTIME_DIR/ssh-agent.env" > /dev/null
 fi
-source "$sshAgentFile" > /dev/null
 
 # enable color in some command output
 if [ -x /usr/bin/dircolors ]; then
