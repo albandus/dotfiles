@@ -182,7 +182,7 @@ fi
 #######################################
 # Auto-launch tmux, set shortcuts to swtich colors
 
-if command -v tmux>/dev/null; then
+if command -v tmux>/dev/null && [[ "$TERM_PROGRAM" != "vscode" ]] ; then
     [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && tmux new-session -A -s main
 
     # check if we have been switched to light, else go dark
