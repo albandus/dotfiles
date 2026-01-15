@@ -3,7 +3,7 @@
 TERM = "xterm-256color"
 
 [font]
-size = 11.0
+size = 12.0
 
 # Require NerdFont (for neovim tree plugin):
 # View list: brew search nerd-font
@@ -93,6 +93,12 @@ mods = "Shift|Super"
 chars = "\u0002c"
 key = "T"
 mods = "Super"
+
+# \ and line break, for claude code
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\\\n"
 
 # Find keycodes:
 # showkey -a / showkey --scancodes
