@@ -9,6 +9,8 @@
     fa = fetch --all --tags --prune
     tagcommit = rev-list -n 1
 
+    # Rebase on given number of latest commits
+    rb = "!f() { git rebase -i HEAD~$1; }; f"
     # Diff on given number of latest commits
     dif = "!r() { git diff HEAD~$1 HEAD; }; r"
     # Interactive rebase with the given number of latest commits
