@@ -59,5 +59,6 @@
     "markdown-table-formatter.markdownGrammarScopes": [
       "markdown",
       "plaintext"
-    ]
+    ],
+    "editor.wordBasedSuggestions": "off"
 }
