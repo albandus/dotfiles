@@ -13,3 +13,5 @@ docker-compose.override.yml
 .php_cs.cache
 .yarn/
 .yarnrc.yml
+.claude
+.idea/
