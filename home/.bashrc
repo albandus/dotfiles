@@ -12,6 +12,7 @@ CUSTOM_BIN="$HOME/.$USER/bin"
 [ -f ~/.local_bashrc ] && source ~/.local_bashrc
 
 export EDITOR=nvim
+export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export QUOTING_STYLE=literal
 export HISTCONTROL=ignoreboth
@@ -165,9 +166,6 @@ __add_path_entry "$CUSTOM_BIN"
 
 export GOPATH="$HOME/.go"
 __add_path_entry "$GOPATH/bin"
-
-export VOLTA_HOME="$HOME/.volta"
-__add_path_entry "$VOLTA_HOME/bin"
 
 __add_path_entry "$HOME/.local/bin"
 
