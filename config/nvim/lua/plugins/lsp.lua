@@ -35,23 +35,28 @@ return {
   {
     'neovim/nvim-lspconfig',
     config = function()
-      local lsp = require('lspconfig')
-      lsp["gopls"].setup {
-        on_attach = on_attach,
-        root_dir = lsp.util.root_pattern('.git', 'src/go.mod', 'go.mod'),
+      -- Use the new vim.lsp.config API for Neovim 0.11+
+      vim.lsp.config.gopls = {
+        cmd = { 'gopls' },
+        filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
+        root_markers = { '.git', 'src/go.mod', 'go.mod' },
         settings = {
           gopls = {
             gofumpt = true
           }
         }
       }
-      lsp["biome"].setup {
-        on_attach = on_attach,
+
+      vim.lsp.config.biome = {
+        cmd = { 'biome', 'lsp-proxy' },
+        filetypes = { 'javascript', 'javascriptreact', 'json', 'jsonc', 'typescript', 'typescript.tsx', 'typescriptreact' },
       }
+
       -- See: https://github.com/LuaLS/lua-language-server
       -- And: https://luals.github.io/#neovim-install
-      lsp["lua_ls"].setup {
-        on_attach = on_attach,
+      vim.lsp.config.lua_ls = {
+        cmd = { 'lua-language-server' },
+        filetypes = { 'lua' },
         settings = {
           Lua = {
             runtime = {
@@ -75,30 +80,43 @@ return {
             },
           },
         },
-        lsp["pylsp"].setup {
-          on_attach = on_attach,
-          settings = {
-            pylsp = {
-              plugins = {
-                -- formatter options
-                black = { enabled = true },
-                autopep8 = { enabled = false },
-                yapf = { enabled = false },
-                -- linter options
-                pylint = { enabled = true, executable = "pylint" },
-                pyflakes = { enabled = false },
-                pycodestyle = { enabled = false },
-                -- type checker
-                pylsp_mypy = { enabled = true },
-                -- auto-completion options
-                jedi_completion = { fuzzy = true },
-                -- import sorting
-                pyls_isort = { enabled = true },
-              },
+      }
+
+      vim.lsp.config.pylsp = {
+        cmd = { 'pylsp' },
+        filetypes = { 'python' },
+        settings = {
+          pylsp = {
+            plugins = {
+              -- formatter options
+              black = { enabled = true },
+              autopep8 = { enabled = false },
+              yapf = { enabled = false },
+              -- linter options
+              pylint = { enabled = true, executable = "pylint" },
+              pyflakes = { enabled = false },
+              pycodestyle = { enabled = false },
+              -- type checker
+              pylsp_mypy = { enabled = true },
+              -- auto-completion options
+              jedi_completion = { fuzzy = true },
+              -- import sorting
+              pyls_isort = { enabled = true },
             },
           },
         },
       }
+
+      -- Enable LSP servers with on_attach
+      vim.lsp.enable({ 'gopls', 'biome', 'lua_ls', 'pylsp' })
+
+      -- Set up on_attach for all LSP clients
+      vim.api.nvim_create_autocmd('LspAttach', {
+        callback = function(args)
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          on_attach(client, args.buf)
+        end,
+      })
       -- Auto format go imports, source:
       -- https://github.com/golang/tools/blob/master/gopls/doc/vim.md#neovim-imports
       vim.api.nvim_create_autocmd("BufWritePre", {
