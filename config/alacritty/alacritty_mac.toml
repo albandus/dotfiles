@@ -100,6 +100,13 @@ key = "Return"
 mods = "Shift"
 chars = "\\\n"
 
+# Send ctrl+b r
+# Tmux shortcut
+[[keyboard.bindings]]
+chars = "\u0002r"
+key = "R"
+mods = "Super"
+
 # Find keycodes:
 # showkey -a / showkey --scancodes
 # Save alacritty config file with wrong key names to get a list (alacritty auto
