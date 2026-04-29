@@ -3,7 +3,7 @@
 TERM = "xterm-256color"
 
 [font]
-size = 12.0
+size = 13.0
 
 # Require NerdFont (for neovim tree plugin):
 # View list: brew search nerd-font
