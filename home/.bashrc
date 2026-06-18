@@ -74,6 +74,7 @@ alias yinstalled="yay -Qq | fzf --no-mouse --preview 'yay -Qil {}' --layout=reve
 alias d="diff-so-fancy | less -R"
 alias publicip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
+alias ga="git add -A"
 
 #######################################
 ### Prompt
@@ -199,3 +200,14 @@ alias jour="tmux source-file $DOTFILES_DIR/config/tmux/tmux_light.conf; tmux set
 alias nuit="tmux source-file $DOTFILES_DIR/config/tmux/tmux_dark.conf; tmux set-environment THEME 'dark'"
 
 # source "$HOME/.profile.d/clifen.sh"
+
+# pnpm
+export PNPM_HOME="/Users/alban/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+#
+
+eval "$(mise activate bash)"
