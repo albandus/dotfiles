@@ -1,5 +1,5 @@
 # If not running interactively, don't do anything
-[ -z "$PS1" ] && return
+[[ -z "$PS1" && -z "$CLAUDECODE" ]] && return
 
 __add_path_entry() {
     case ":$PATH:" in
@@ -67,14 +67,12 @@ gl () {
 }
 
 alias cls="clear && tmux clear-history"
-alias hx="helix"
 alias n="nvim"
 alias ysearch="yay -Slq | fzf --no-mouse --preview 'yay -Si {}' --layout=reverse"
 alias yinstalled="yay -Qq | fzf --no-mouse --preview 'yay -Qil {}' --layout=reverse --bind 'enter:execute(yay -Qil {} | less)'"
 alias d="diff-so-fancy | less -R"
 alias publicip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
-alias ga="git add -A"
 
 #######################################
 ### Prompt
@@ -141,6 +139,11 @@ then
     source /opt/homebrew/etc/profile.d/bash_completion.sh
     __git_complete g __git_main
 fi
+
+alias ga="git add -A"
+gc() {
+    git commit -m "$*"
+}
 
 #######################################
 

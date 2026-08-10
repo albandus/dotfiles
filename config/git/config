@@ -20,9 +20,9 @@
     # List commits, with modified files
     ll = "log --numstat --pretty=format:'%C(red)%h %Creset%s %C(blue)%an %C(green)%ci %C(yellow)%d %Creset'"
 [diff]
-	tool = nvimdiff
+    tool = nvimdiff
 [difftool]
-	prompt = false
+    prompt = false
 [include]
     path = ~/.local_gitconfig
 [init]
@@ -33,5 +33,6 @@
     rebase = true
 [push]
     default = simple
+    autoSetupRemote = true
 [switch]
     detachedHead = false
