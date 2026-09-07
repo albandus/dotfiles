@@ -101,11 +101,18 @@ mods = "Shift"
 chars = "\\\n"
 
 # Send ctrl+b r
-# Tmux shortcut
+# Tmux shortcut / Set window title to current dir
 [[keyboard.bindings]]
 chars = "\u0002r"
 key = "R"
 mods = "Super"
+
+# Send ctrl+b e
+# Tmux shortcut: set window title, prefill, but editable
+[[keyboard.bindings]]
+chars = "\u0002e"
+key = "R"
+mods = "Shift|Super"
 
 # Find keycodes:
 # showkey -a / showkey --scancodes
