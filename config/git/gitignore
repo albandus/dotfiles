@@ -15,5 +15,5 @@
 alocal*
 anotes.md
 docker-compose.override.yml
-plan.md
+/plan*.md
 
