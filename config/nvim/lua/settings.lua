@@ -39,6 +39,10 @@ vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
     command = "set filetype=bash",
 })
 vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
+    pattern = { ".local_zshrc" },
+    command = "set filetype=zsh",
+})
+vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
     pattern = { ".local_gitconfig", "*/git/config" },
     command = "set filetype=gitconfig",
 })

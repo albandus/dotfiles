@@ -7,6 +7,9 @@ dotfiles
 - Alacritty / Tmux: mac version done by copying linux version and adapting some
   values. No tries to make it dynamic / auto. On mac after new install, check
   alacritty file if any font issue.
+- Zsh: `.zshrc` is independent from `.bashrc`. Install `zsh
+  zsh-autosuggestions zsh-syntax-highlighting` (pacman or brew), then
+  `chsh -s $(which zsh)`.
 
 ## Nvim
 
