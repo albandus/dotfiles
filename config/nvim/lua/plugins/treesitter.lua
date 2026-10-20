@@ -41,6 +41,9 @@ return {
     'nvim-treesitter/nvim-treesitter-textobjects'
   },
   config = function ()
+    -- There is no zsh parser: reuse the bash one for zsh files.
+    vim.treesitter.language.register('bash', 'zsh')
+
     -- The main branch does not enable highlighting on its own: start it per
     -- buffer, and only when a parser for that filetype is actually available.
     vim.api.nvim_create_autocmd('FileType', {
