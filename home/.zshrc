@@ -31,15 +31,15 @@ SAVEHIST=$HISTSIZE
 setopt inc_append_history hist_ignore_space hist_ignore_dups extended_history
 
 # Keys not bound by default (xterm/alacritty and tmux sequences)
-bindkey '^[[H' beginning-of-line
-bindkey '^[OH' beginning-of-line
-bindkey '^[[1~' beginning-of-line
-bindkey '^[[F' end-of-line
-bindkey '^[OF' end-of-line
-bindkey '^[[4~' end-of-line
-bindkey '^[[3~' delete-char
-bindkey '^[[1;5D' backward-word
-bindkey '^[[1;5C' forward-word
+bindkey '^[[H' beginning-of-line     # Home (normal cursor mode)
+bindkey '^[OH' beginning-of-line     # Home (application cursor mode)
+bindkey '^[[1~' beginning-of-line    # Home (tmux/screen, linux console)
+bindkey '^[[F' end-of-line           # End (normal cursor mode)
+bindkey '^[OF' end-of-line           # End (application cursor mode)
+bindkey '^[[4~' end-of-line          # End (tmux/screen, linux console)
+bindkey '^[[3~' delete-char          # Delete
+bindkey '^[[1;5D' backward-word      # Ctrl+Left
+bindkey '^[[1;5C' forward-word       # Ctrl+Right
 # Ctrl-W / word moves stop at path separators
 WORDCHARS=${WORDCHARS//\/}
 
