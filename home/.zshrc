@@ -42,6 +42,10 @@ bindkey '^[[1;5D' backward-word      # Ctrl+Left
 bindkey '^[[1;5C' forward-word       # Ctrl+Right
 # Ctrl-W / word moves stop at path separators
 WORDCHARS=${WORDCHARS//\/}
+# Edit current command line in $EDITOR, like bash
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^X^E' edit-command-line     # Ctrl+X Ctrl+E
 
 autoload -Uz compinit && compinit
 zstyle ':completion:*' menu select
