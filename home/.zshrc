@@ -28,7 +28,12 @@ setopt prompt_subst
 HISTFILE=~/.zsh_history
 HISTSIZE=32768
 SAVEHIST=$HISTSIZE
-setopt inc_append_history hist_ignore_space hist_ignore_dups extended_history
+setopt inc_append_history     # write each command to histfile, no need to close shell
+setopt extended_history       # horodate commands in history
+setopt hist_ignore_all_dups   # drop older duplicates of a command
+setopt hist_ignore_space      # commands starting with a space are not saved
+setopt hist_reduce_blanks     # trim superfluous whitespace
+setopt hist_verify            # show !! expansions before running them
 
 # Keys not bound by default (xterm/alacritty and tmux sequences)
 bindkey '^[[H' beginning-of-line     # Home (normal cursor mode)
@@ -52,6 +57,16 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # Always list choices on ambiguous completion, even with an unambiguous prefix
 unsetopt list_ambiguous
+
+# cd keeps a stack; `cd -<Tab>` lists it
+setopt auto_pushd pushd_ignore_dups
+
+# --- Keys: Up/Down search history by what is already typed ---
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey '^[[A' up-line-or-beginning-search '^[OA' up-line-or-beginning-search
+bindkey '^[[B' down-line-or-beginning-search '^[OB' down-line-or-beginning-search
 
 #######################################
 
