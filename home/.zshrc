@@ -157,6 +157,8 @@ PS1='%F{cyan}%D{%H:%M} %F{yellow}${promptUser}%F{green}@${promptHostname} %B%F{b
 ### Git shortcuts
 
 g() { if (( $# > 0 )); then git "$@"; else git status; fi; }
+# To get git completion on g: compdef g=git. Warning: but must be after any
+# other compinit
 compdef g=git
 alias gsl="git stash list"
 gss() { if [[ $# = 1 ]]; then git stash save "$1"; else echo "Stash name required."; fi; }
