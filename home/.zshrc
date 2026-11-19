@@ -258,3 +258,5 @@ do
     done
 done
 unset plugin dir
+
+# source "$HOME/.zprofile.d/clifen.zsh"
