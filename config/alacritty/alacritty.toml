@@ -69,6 +69,26 @@ chars = "\u0002c"
 key = "T"
 mods = "Alt"
 
+# \ and line break, for claude code
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\\\n"
+
+# Send ctrl+b r
+# Tmux shortcut / Set window title to current dir
+[[keyboard.bindings]]
+chars = "\u0002r"
+key = "R"
+mods = "Alt"
+
+# Send ctrl+b e
+# Tmux shortcut: set window title, prefill, but editable
+[[keyboard.bindings]]
+chars = "\u0002e"
+key = "R"
+mods = "Shift|Alt"
+
 # Find keycodes:
 # showkey -a / showkey --scancodes
 # Save alacritty config file with wrong key names to get a list (alacritty auto
